@@ -5,6 +5,7 @@
     "calender_left calender_right"
     "footer        footer";
   grid-template-rows: 10vh minmax(80vh, auto) 10vh;
+  grid-template-columns: 1fr 1fr;
 }
 
 .header {
@@ -17,18 +18,31 @@
 }
 .calender-right {
   grid-area: calender_right;
+  transform: scale(0.7);
+  background-color: pink;
 }
 .footer {
   grid-area: footer;
   background-color: rgb(198, 255, 207);
 }
 
-.calender {
+.calender1 {
   display: grid;
   grid-template-areas:
     "one two"
     "three four";
-  padding: 1em;
+  padding: 3em;
+  grid-template-rows: 50px 50px;
+  transform: scale(0.1);
+}
+.calender2 {
+  display: grid;
+  grid-template-areas:
+    "one two"
+    "three four";
+  padding: 3em;
+  grid-template-rows: 50px 50px;
+  transform: scale(1);
 }
 
 .one,

@@ -6,7 +6,7 @@ function App() {
     <div className="App">
       <div class="header"></div>
       <div class="calender_left">
-        <div class="calender">
+        <div class="calender1">
           <div class="one">1</div>
           <div class="two">2</div>
           <div class="three">3</div>
@@ -14,7 +14,7 @@ function App() {
         </div>
       </div>
       <div class="calender_right">
-        <div class="calender">
+        <div class="calender2">
           <div class="one">5</div>
           <div class="two">6</div>
           <div class="three">7</div>
