@@ -1,38 +1,42 @@
 .App {
-  text-align: center;
+  display: grid;
+  grid-template-areas:
+    "header        header"
+    "calender_left calender_right"
+    "footer        footer";
+  grid-template-rows: 10vh minmax(80vh, auto) 10vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header {
+  grid-area: header;
+  background-color: rgb(198, 255, 207);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.calender-left {
+  grid-area: calender_left;
+}
+.calender-right {
+  grid-area: calender_right;
+}
+.footer {
+  grid-area: footer;
+  background-color: rgb(198, 255, 207);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.calender {
+  display: grid;
+  grid-template-areas:
+    "one two"
+    "three four";
+  padding: 1em;
+}
+
+.one,
+.two,
+.three,
+.four {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  align-content: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  border: 1px solid black;
 }

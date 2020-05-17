@@ -1,22 +1,27 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div class="header"></div>
+      <div class="calender_left">
+        <div class="calender">
+          <div class="one">1</div>
+          <div class="two">2</div>
+          <div class="three">3</div>
+          <div class="four">4</div>
+        </div>
+      </div>
+      <div class="calender_right">
+        <div class="calender">
+          <div class="one">5</div>
+          <div class="two">6</div>
+          <div class="three">7</div>
+          <div class="four">8</div>
+        </div>
+      </div>
+      <div class="footer"></div>
     </div>
   );
 }
