@@ -1,6 +1,14 @@
-DROP TYPE IF EXISTS ht_weekday CASCADE;
+DROP TABLE IF EXISTS day CASCADE;
 
-CREATE TYPE ht_weekday AS ENUM (
+DROP TABLE IF EXISTS calender CASCADE;
+
+DROP TYPE IF EXISTS weekday CASCADE;
+
+DROP TYPE IF EXISTS month CASCADE;
+
+DROP TYPE IF EXISTS status CASCADE;
+
+CREATE TYPE weekday AS ENUM (
     'Monday',
     'Tuesday',
     'Wednesday',
@@ -10,9 +18,7 @@ CREATE TYPE ht_weekday AS ENUM (
     'Sunday'
 );
 
-DROP TYPE IF EXISTS ht_month CASCADE;
-
-CREATE TYPE ht_month AS ENUM (
+CREATE TYPE month AS ENUM (
     'January',
     'February',
     'March',
@@ -27,28 +33,23 @@ CREATE TYPE ht_month AS ENUM (
     'December'
 );
 
-DROP TYPE IF EXISTS ht_status CASCADE;
+CREATE TYPE status AS ENUM ('Not Set', 'Complete', 'Incomplete');
 
-CREATE TYPE ht_status AS ENUM ('Not Set', 'Complete', 'Incomplete');
-
-DROP TABLE IF EXISTS ht_day CASCADE;
-
-CREATE TABLE ht_day (
+CREATE TABLE calender (
     id SERIAL PRIMARY KEY,
-    day INTEGER,
-    month ht_month,
-    year INTEGER,
-    grid_position INTEGER,
-    day_of_week ht_weekday,
-    status ht_status,
-    note text
+    name varchar(255),
+    year INTEGER
 );
 
-DROP TABLE IF EXISTS ht_calender CASCADE;
-
-CREATE TABLE ht_calender (
+CREATE TABLE day (
     id SERIAL PRIMARY KEY,
-    ht_day_id INTEGER,
-    calender_name varchar(255),
-    FOREIGN KEY (ht_day_id) REFERENCES ht_day (id)
+    day INTEGER,
+    month month,
+    year INTEGER,
+    grid_position INTEGER,
+    day_of_week weekday,
+    status status,
+    note text,
+    calender_id INTEGER,
+    FOREIGN KEY (calender_id) REFERENCES calender (id)
 );
