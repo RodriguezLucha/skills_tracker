@@ -1,0 +1,17 @@
+.cal_name {
+  font-size: 3em;
+}
+
+.days_container {
+  display: flex;
+  flex-flow: row wrap;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.one_day {
+  border: 1px solid grey;
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+}

@@ -44,7 +44,7 @@ sub month {
     my $pg     = Mojo::Pg->new('postgresql://postgres@/habit_tracker');
     my $month  = $c->param('month');
     my $result = $pg->db->query(
-        'select * from day join calender
+        'select *, day.id as day_id from day join calender
          on calender.id = day.calender_id where month = ?', ($month)
     )->hashes;
 
