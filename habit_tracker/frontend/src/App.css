@@ -15,3 +15,10 @@
   height: 100px;
   padding: 10px;
 }
+
+.complete {
+  background-color: lightgreen;
+}
+.incomplete {
+  background-color: pink;
+}

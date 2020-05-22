@@ -1,4 +1,6 @@
 package MyApp::Controller::Calender;
+use strict;
+use warnings;
 
 use Mojo::Base 'Mojolicious::Controller';
 use Mojo::Pg;
@@ -37,6 +39,20 @@ sub list {
     my $pg   = Mojo::Pg->new('postgresql://postgres@/habit_tracker');
     my $data = $pg->db->query('select * from calender')->hashes;
     return $c->render( json => { data => $data } );
+}
+
+sub update_status {
+    my $c  = shift;
+    my $pg = Mojo::Pg->new('postgresql://postgres@/habit_tracker');
+
+    my $day    = $c->param('day');
+    my $status = $c->param('status');
+
+    print "day - $day, status - $status\n";
+
+    $pg->db->update( 'day', { status => "$status" }, { id => $day } );
+
+    return $c->render( json => { data => "done" } );
 }
 
 sub month {

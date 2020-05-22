@@ -10,6 +10,7 @@ const snakecase = (str) =>
 
 function App() {
   const [days, setDays] = useState({});
+  const [toggle, setToggle] = useState(true);
 
   async function fetchData() {
     const res = await fetch("calender/month/May");
@@ -18,10 +19,18 @@ function App() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [toggle]);
 
-  async function handleComplete(day_id) {
-    console.log(day_id)
+  async function handleComplete(day_id, status) {
+    const requestOptions = {
+      method: "POST",
+    };
+    ///calender/day/:day/status/:status
+    const res = await fetch(
+      `calender/day/${day_id}/status?status=${status}`,
+      requestOptions
+    );
+    setToggle(!toggle);
   }
 
   return (
@@ -41,9 +50,23 @@ function App() {
                     <div>{day_obj.day}</div>
                     <div>{day_obj.day_of_week}</div>
                     <div>{day_obj.note}</div>
-                    <button>␡</button>
-                    <button onClick={() => handleComplete(day_obj.day_id) }>✔</button>
-                    <button>𐄂</button>
+                    <button
+                      onClick={() => handleComplete(day_obj.day_id, "Not Set")}
+                    >
+                      ␡
+                    </button>
+                    <button
+                      onClick={() => handleComplete(day_obj.day_id, "Complete")}
+                    >
+                      ✔
+                    </button>
+                    <button
+                      onClick={() =>
+                        handleComplete(day_obj.day_id, "Incomplete")
+                      }
+                    >
+                      𐄂
+                    </button>
                   </div>
                 );
               })}

@@ -13,6 +13,7 @@ sub startup {
     $r->get('/calender')->to('calender#list');
     $r->get('/calender/month/:month')->to('calender#month');
     $r->get('/calender/day/:day')->to('calender#day');
+    $r->post('/calender/day/:day/status')->to('calender#update_status');
     $r->post('/calender')->to('calender#create');
 }
 
