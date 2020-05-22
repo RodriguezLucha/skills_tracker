@@ -11,6 +11,8 @@ sub startup {
     my $r = $self->routes;
 
     $r->get('/calender')->to('calender#list');
+    $r->get('/calender/month/:month')->to('calender#month');
+    $r->get('/calender/day/:day')->to('calender#day');
     $r->post('/calender')->to('calender#create');
 }
 
