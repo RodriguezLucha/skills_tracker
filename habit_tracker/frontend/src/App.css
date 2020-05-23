@@ -38,7 +38,12 @@
 }
 
 .myLabelClass {
-  background-color: blue;
-  line-height: 100px;
-  width: 100%;
+}
+
+button {
+  outline: none;
+}
+
+.hover_class {
+  opacity: 50%;
 }

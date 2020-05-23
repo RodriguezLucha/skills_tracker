@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import EditableLabel from "react-inline-editing";
+
+import EasyEdit, {Types} from 'react-easy-edit';
 import {useSpring, animated} from 'react-spring'
 
 import "./App.css";
@@ -111,15 +112,16 @@ function App() {
 
                       { zoomed &&
                       <>
-                        <EditableLabel
-                        text={day_obj.note}
-                        labelClassName="myLabelClass"
-                        inputClassName="myInputClass"
-                        inputWidth="100%"
-                        inputHeight="100%"
-                        onFocusOut={(text) =>
-                          handleFocusOut(day_obj.day_id, text)
-                        }
+                        <EasyEdit
+                          type={Types.TEXT}
+                          value={day_obj.note}
+                          placeholder="___________________"
+                          onSave={(text) => handleFocusOut(day_obj.day_id, text)}
+                          saveButtonLabel="Save"
+                          hideSaveButton="1"
+                          hideCancelButton="1"
+                          onHoverCssClass="hover_class"
+                          cancelButtonLabel="Cancel"
                         />
                         <div>
                           <button onClick={() => handleComplete(day_obj.day_id, "Not Set")} > ␡ </button>
