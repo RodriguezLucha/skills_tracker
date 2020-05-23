@@ -22,3 +22,12 @@
 .incomplete {
   background-color: pink;
 }
+
+.cal_header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fa-trash {
+    font-size: 20px;
+}

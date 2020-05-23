@@ -41,6 +41,16 @@ sub list {
     return $c->render( json => { data => $data } );
 }
 
+sub delete {
+    my $c           = shift;
+    my $pg          = Mojo::Pg->new('postgresql://postgres@/habit_tracker');
+    my $calender_id = $c->param('calender_id');
+
+    $pg->db->delete( 'calender', { id => $calender_id } );
+
+    return $c->render( json => { data => $calender_id } );
+}
+
 sub update_status {
     my $c  = shift;
     my $pg = Mojo::Pg->new('postgresql://postgres@/habit_tracker');
@@ -48,9 +58,19 @@ sub update_status {
     my $day    = $c->param('day');
     my $status = $c->param('status');
 
-    print "day - $day, status - $status\n";
-
     $pg->db->update( 'day', { status => "$status" }, { id => $day } );
+
+    return $c->render( json => { data => "done" } );
+}
+
+sub update_note {
+    my $c  = shift;
+    my $pg = Mojo::Pg->new('postgresql://postgres@/habit_tracker');
+
+    my $day  = $c->param('day');
+    my $note = $c->param('note');
+
+    $pg->db->update( 'day', { note => "$note" }, { id => $day } );
 
     return $c->render( json => { data => "done" } );
 }
@@ -68,6 +88,7 @@ sub month {
     my $data;
     foreach my $row (@rows) {
         $data->{ $row->{'calender_id'} }{'days'}{ $row->{'day'} } = $row;
+        $data->{ $row->{'calender_id'} }{'month'} = $row->{'month'};
     }
 
     $result = $pg->db->query('select * from calender c;')->hashes;

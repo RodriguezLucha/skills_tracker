@@ -51,5 +51,5 @@ CREATE TABLE day (
     status status,
     note text,
     calender_id INTEGER,
-    FOREIGN KEY (calender_id) REFERENCES calender (id)
+    FOREIGN KEY (calender_id) REFERENCES calender (id) ON DELETE CASCADE
 );
