@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import EditableLabel from "react-inline-editing";
+import {useSpring, animated} from 'react-spring'
 
 import "./App.css";
 
@@ -13,6 +14,8 @@ const snakecase = (str) =>
 function App() {
   const [days, setDays] = useState({});
   const [toggle, setToggle] = useState(true);
+  const [zoomed, setZoomed] = useState(true);
+
   const [calenderName, setCalenderName] = useState("");
 
   async function fetchData() {
@@ -67,8 +70,19 @@ function App() {
     setToggle(!toggle);
   }
 
+  const props = useSpring({
+    height: zoomed ? 150 : 30,
+    width: zoomed ? 150 : 70,
+    border: '1px solid black',
+    margin: 2,
+    padding: 10
+  });
+
   return (
     <div className="App">
+      <button onClick={() => setZoomed(!zoomed)}>
+        <i className="fas fa-search-plus"></i>
+      </button>
       {Object.keys(days).map((calender_id) => {
         let name = days[calender_id].name;
         let month = days[calender_id].month;
@@ -78,6 +92,7 @@ function App() {
             <div className="cal_header">
               <h2>{month}</h2>
               <h1>{name}</h1>
+
               <button onClick={() => handleCalenderDelete(calender_id)}>
                 <i className="fa fa-trash"></i>
               </button>
@@ -87,37 +102,34 @@ function App() {
                 let day_obj = days[calender_id].days[sday];
                 let status = snakecase(day_obj.status);
                 return (
-                  <div className={"one_day " + status} key={day_obj.day_id}>
-                    <div>{day_obj.day}</div>
-                    <div>{day_obj.day_of_week}</div>
-                    <EditableLabel
-                      text={day_obj.note}
-                      labelClassName="myLabelClass"
-                      inputClassName="myInputClass"
-                      inputWidth="100px"
-                      inputHeight="15px"
-                      onFocusOut={(text) =>
-                        handleFocusOut(day_obj.day_id, text)
+                  <animated.div key={day_obj.day_id} style={props} className={status}>
+                    <div className="one_day" key={day_obj.day_id}>
+                      <div className="one_day_header">
+                        <div>{day_obj.day}</div>
+                        <div>{day_obj.day_of_week}</div>
+                      </div>
+
+                      { zoomed &&
+                      <>
+                        <EditableLabel
+                        text={day_obj.note}
+                        labelClassName="myLabelClass"
+                        inputClassName="myInputClass"
+                        inputWidth="100%"
+                        inputHeight="100%"
+                        onFocusOut={(text) =>
+                          handleFocusOut(day_obj.day_id, text)
+                        }
+                        />
+                        <div>
+                          <button onClick={() => handleComplete(day_obj.day_id, "Not Set")} > ␡ </button>
+                          <button onClick={() => handleComplete(day_obj.day_id, "Complete")} > ✔ </button>
+                          <button onClick={() => handleComplete(day_obj.day_id, "Incomplete") } > 𐄂 </button>
+                        </div>
+                      </>
                       }
-                    />
-                    <button
-                      onClick={() => handleComplete(day_obj.day_id, "Not Set")}
-                    >
-                      ␡
-                    </button>
-                    <button
-                      onClick={() => handleComplete(day_obj.day_id, "Complete")}
-                    >
-                      ✔
-                    </button>
-                    <button
-                      onClick={() =>
-                        handleComplete(day_obj.day_id, "Incomplete")
-                      }
-                    >
-                      𐄂
-                    </button>
-                  </div>
+                    </div>
+                  </animated.div>
                 );
               })}
             </div>

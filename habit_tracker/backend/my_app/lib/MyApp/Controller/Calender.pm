@@ -38,7 +38,8 @@ sub list {
     my $c    = shift;
     my $pg   = Mojo::Pg->new('postgresql://postgres@/habit_tracker');
     my $data = $pg->db->query('select * from calender')->hashes;
-    return $c->render( json => { data => $data } );
+
+    return $c->render( json => $data );
 }
 
 sub delete {
@@ -97,7 +98,7 @@ sub month {
         $data->{ $row->{'id'} }{'name'} = $row->{'name'};
     }
 
-    return $c->render( json => { data => $data } );
+    return $c->render( json => { data => $data ? $data : {} } );
 }
 
 sub create {
@@ -137,7 +138,6 @@ sub create {
                 grid_position => 0,
                 day_of_week   => $days_of_week{$day_of_week},
                 status        => $NOT_SET,
-                note          => '-'
             }
         );
 

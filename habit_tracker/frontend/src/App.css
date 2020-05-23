@@ -10,10 +10,15 @@
 }
 
 .one_day {
-  border: 1px solid grey;
-  width: 100px;
-  height: 100px;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.one_day_header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .complete {
@@ -24,10 +29,16 @@
 }
 
 .cal_header {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .fa-trash {
-    font-size: 20px;
+  font-size: 20px;
+}
+
+.myLabelClass {
+  background-color: blue;
+  line-height: 100px;
+  width: 100%;
 }
