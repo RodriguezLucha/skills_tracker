@@ -1,3 +1,3 @@
 #!/usr/local/bin/zsh
-morbo script/my_app
+pm2 start "morbo script/my_app"
 
