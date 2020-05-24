@@ -1,2 +1,3 @@
 #!/usr/local/bin/zsh
-npm run start
+pm2 start npm -- start
+
