@@ -47,3 +47,15 @@ button {
 .hover_class {
   opacity: 50%;
 }
+
+.month_list {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+
+.hover_over:hover {
+  text-decoration: underline;
+  cursor: pointer;
+
+}
