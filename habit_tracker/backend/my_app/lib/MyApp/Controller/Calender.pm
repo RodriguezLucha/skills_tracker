@@ -101,6 +101,73 @@ sub month {
     return $c->render( json => { data => $data ? $data : {} } );
 }
 
+sub monthv2 {
+    my $c      = shift;
+    my $pg     = Mojo::Pg->new('postgresql://postgres@/habit_tracker');
+    my $month  = $c->param('month');
+    my $result = $pg->db->query(
+        'select *, day.id as day_id from day join calender
+         on calender.id = day.calender_id where month = ?', ($month)
+    )->hashes;
+
+    my $output = { id => $month };
+
+# "id","day","month","year","grid_position","day_of_week","status","note","calender_id","id","name","year","day_id"
+# 1956,5,May,2020,0,Tuesday,Complete,"2.3 miles",6,6,Running,2020,1956
+
+    my @rows = @$result;
+
+    my $data;
+    foreach my $row (@rows) {
+        $data->{'calenders'}{ $row->{'calender_id'} }{'days'}
+          { $row->{'day_id'} } = {
+            day         => $row->{'day'},
+            day_of_week => $row->{'day_of_week'},
+            id          => $row->{'day_id'},
+            note        => $row->{'note'},
+            status      => $row->{'status'}
+          };
+        $data->{'calenders'}{ $row->{'calender_id'} }{'name'} = $row->{'name'};
+    }
+
+    # "calenders": {
+    #     "6": {
+    #       "days": {
+    #         "1952": {
+    #           "day_of_week": "Friday",
+    #           "id": 1952,
+    #           "note": "2.3 miles",
+
+    my @calenders = ();
+    foreach
+      my $calender_id ( sort { $a <=> $b } keys %{ $data->{'calenders'} } )
+    {
+        my @days = ();
+        foreach my $day_id ( sort { $a <=> $b }
+            keys %{ $data->{'calenders'}{$calender_id}{days} } )
+        {
+            push @days,
+              {
+                day => $data->{'calenders'}{$calender_id}{days}{$day_id}{day},
+                day_of_week => $data->{'calenders'}{$calender_id}{days}{$day_id}{day_of_week},
+                id   => $data->{'calenders'}{$calender_id}{days}{$day_id}{id},
+                note => $data->{'calenders'}{$calender_id}{days}{$day_id}{note},
+                status => $data->{'calenders'}{$calender_id}{days}{$day_id}{status},
+              };
+        }
+
+        push @calenders,
+          {
+            id   => $calender_id,
+            name => $data->{'calenders'}{$calender_id}{'name'},
+            days => \@days
+          };
+    }
+    $output->{calenders} = \@calenders;
+
+    return $c->render( json => $output );
+}
+
 sub create {
     my $c    = shift;
     my $pg   = Mojo::Pg->new('postgresql://postgres@/habit_tracker');

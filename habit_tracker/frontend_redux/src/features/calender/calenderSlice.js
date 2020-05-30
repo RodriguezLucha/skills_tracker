@@ -3,13 +3,19 @@ import {
   createSlice,
   createEntityAdapter
 } from "@reduxjs/toolkit";
+import { normalize } from "normalizr";
+
+import {monthlyCalenderInfo} from "../../schemas";
 
 export const fetchCalenderByMonth = createAsyncThunk(
   "calender/fetchByMonth",
   async (month, thunkAPI) => {
-    const response = await fetch(`calender/month/${month}`);
     debugger;
-    return response.json.data;
+    const response = await fetch(`calender/monthv2/${month}`);
+    const data = await response.json();
+    const normalized = normalize(data);
+    console.log(normalized.entities);
+    return normalized.entities;
   }
 );
 
