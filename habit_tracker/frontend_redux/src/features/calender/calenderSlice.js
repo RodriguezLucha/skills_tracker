@@ -1,28 +1,31 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import { calenderAPI } from "./calenderAPI";
+import {
+  createAsyncThunk,
+  createSlice,
+  createEntityAdapter
+} from "@reduxjs/toolkit";
 
-// First, create the thunk
-const fetchCalenerByMonth = createAsyncThunk(
-  "users/fetchByIdStatus",
+export const fetchCalenderByMonth = createAsyncThunk(
+  "calender/fetchByMonth",
   async (month, thunkAPI) => {
     const response = await fetch(`calender/month/${month}`);
+    debugger;
     return response.json.data;
   }
 );
 
-// Then, handle actions in your reducers:
-const calenderSlice = createSlice({
+export const calenderAdapter = createEntityAdapter();
+
+const initialState = calenderAdapter.getInitialState();
+
+export const calenderSlice = createSlice({
   name: "calender",
-  initialState: { entities: [], loading: "idle" },
-  reducers: {
-    
+  initialState,
+  reducers: {},
+  extraReducers: builder => {
+    builder.addCase(fetchCalenderByMonth.fulfilled, calenderAdapter.upsertMany);
   }
 });
 
 const { actions, reducer } = calenderSlice;
-export const { createPost, updatePost, deletePost } = actions
-
+export const {} = actions;
 export default reducer;
-
-// Later, dispatch the thunk as needed in the app
-//dispatch(fetchCalenderByMonth('May'))
