@@ -1,7 +1,7 @@
 // require { normalize, schema } from "normalizr";
 const normalizr = require("normalizr");
 const normalize = normalizr.normalize;
-const schema = normalizr.schema;
+const schema = normalizr.schema
 
 let originalData = {
   id: "123",
