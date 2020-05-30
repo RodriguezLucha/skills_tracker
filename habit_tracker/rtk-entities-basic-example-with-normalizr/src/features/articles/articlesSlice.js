@@ -26,6 +26,7 @@ export const slice = createSlice({
   reducers: {},
   extraReducers: {
     [fetchArticle.fulfilled]: (state, action) => {
+      debugger;
       articlesAdapter.upsertMany(state, action.payload.articles);
     }
   }
