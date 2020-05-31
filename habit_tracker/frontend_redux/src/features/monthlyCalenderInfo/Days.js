@@ -6,6 +6,7 @@ import classnames from "classnames";
 import {statusToStyle} from "../../mapping";
 
 
+
 export function Days({days_ids}) {
     let dayEntities = useSelector(selectDayEntities);
 
