@@ -23,9 +23,9 @@ export const calenderSlice = createSlice({
 export const {
     selectById: selectCalenderById,
     selectIds: selectCalenderIds,
-    selectEntities: selectCalenderInfoEntities,
-    selectAll: selectAllCalenderInfos,
-    selectTotal: selectTotalCalenderInfos 
+    selectEntities: selectCalenderEntities,
+    selectAll: selectAllCalenders,
+    selectTotal: selectTotalCalenders 
 } = calenderAdapter.getSelectors(state => state.calender);
 
 const { reducer } = calenderSlice;
