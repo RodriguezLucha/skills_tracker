@@ -10,7 +10,7 @@ import {monthlyCalenderInfo} from "../../schemas";
 export const fetchCalenderByMonth = createAsyncThunk(
   "calender/fetchByMonth",
   async (month, thunkAPI) => {
-    const response = await fetch(`calender/monthv2/${month}`);
+    const response = await fetch(`/calender/monthv2/${month}`);
     const data = await response.json();
     const normalized = normalize(data, monthlyCalenderInfo);
     return normalized.entities;

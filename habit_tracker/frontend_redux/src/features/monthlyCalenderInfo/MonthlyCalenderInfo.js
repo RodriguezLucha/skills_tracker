@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useStorageState } from "react-storage-hooks";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchCalenderByMonth,
@@ -8,29 +7,38 @@ import {
 
 import {Calenders} from "./Calenders";
 
+import {useParams, Link} from "react-router-dom";
+import {Months} from "../months/Months";
 
 export function MonthlyCalenderInfo() {
   const dispatch = useDispatch();
 
-  const [currentMonth] = useStorageState(localStorage, "state_month", "May");
+  //TODO:Move this into redux store now that redux store is persisted to localStorage
+  // const [currentMonth] = useStorageState(localStorage, "state_month", "May");
 
-  useEffect(() => {
-    dispatch(fetchCalenderByMonth(currentMonth));
-  }, []);
+  let {id} = useParams();
 
   const monthlyCalenderInfo = useSelector(state =>
-    selectCalenderInfoById(state, currentMonth)
+    selectCalenderInfoById(state, id)
   );
 
-  console.log(monthlyCalenderInfo);
+  useEffect(() => {
+    dispatch(fetchCalenderByMonth(id));
+  }, [id]);
+
+
   if (!monthlyCalenderInfo) {
     return null;
   }
   return (
     <div>
-      <h1 className="month-name">
-        {monthlyCalenderInfo.id}
-      </h1>
+      <div>
+        <h1 className="month-name">
+          {monthlyCalenderInfo.id}
+        </h1>
+        <Months/>
+        
+      </div>
       <Calenders calender_ids={monthlyCalenderInfo.calenders}/>
     </div>
   );

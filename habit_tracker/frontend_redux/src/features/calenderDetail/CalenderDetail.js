@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, useParams} from "react-router-dom"
+import {Link, useParams, useHistory} from "react-router-dom"
 import {useSelector} from "react-redux"
 import {selectCalenderById} from "../calender/calenderSlice";
 import {selectDayEntities} from "../day/daySlice";
@@ -11,11 +11,12 @@ export function CalenderDetail() {
     let day_ids = calender.days;
     let dayEntities = useSelector(selectDayEntities);
     let days = day_ids.map(id => dayEntities[id]);
+    let history = useHistory();
     
     
     return (
         <div>
-            <Link to="/">Back</Link>
+            <button onClick={() => history.goBack() }>Back</button>
             <div className="days_container">
                 {
                     days.map(day => {

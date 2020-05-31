@@ -13,7 +13,7 @@ function App() {
         <Route path="/calender_detail/:id">
           <CalenderDetail/>
         </Route>
-        <Route path="/">
+        <Route path="/monthly_calender_info/:id">
           <MonthlyCalenderInfo />
         </Route>
       </Switch>
