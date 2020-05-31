@@ -28,9 +28,9 @@ export function MonthlyCalenderInfo() {
 
   return (
     <div>
-      <div className="month-name">
+      <h1 className="month-name">
         {monthlyCalenderInfo.id}
-      </div>
+      </h1>
       <Calenders calender_ids={monthlyCalenderInfo.calenders}/>
     </div>
   );

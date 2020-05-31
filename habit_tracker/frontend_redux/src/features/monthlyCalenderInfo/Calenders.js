@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import {selectCalenderEntities} from "../calender/calenderSlice";
+import {Days} from "./Days";
 
 export function Calenders({calender_ids}) {
     
@@ -13,10 +14,10 @@ export function Calenders({calender_ids}) {
     return (
         <div>
             {calenders.map(calender => {
-                console.log(calender)
                 return(
                 <div key={calender.id}>
-                    <div>{calender.name}</div>
+                    <h5>{calender.name}</h5>
+                    <Days days_ids={calender.days}/>
                 </div>
                 )
             })}
