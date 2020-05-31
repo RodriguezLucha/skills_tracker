@@ -1,7 +1,7 @@
 X Add react router navigation stuff
 X Add a new route to a new details component
 X Add the back and forward links to the new component
-- Persist the redux store to local storage
-- Add the view details for the new component which will
+X Persist the redux store to local storage
+X Add the view details for the new component which will
     load up the whole calender
 - Add the edit text functionality

@@ -16,6 +16,11 @@
 
 .square {
   border: 1px solid black;
-  height: 50px;
+  height: 40px;
   width: 80px;
+}
+.square_big {
+  border: 1px solid black;
+  height: 200px;
+  width: 200px;
 }
