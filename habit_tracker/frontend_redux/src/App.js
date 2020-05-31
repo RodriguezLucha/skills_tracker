@@ -1,13 +1,12 @@
 import React from "react";
 import { Counter } from "./features/counter/Counter";
-import { Calender } from "./features/calender/Calender";
+import { MonthlyCalenderInfo } from "./features/monthlyCalenderInfo/MonthlyCalenderInfo";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <Calender />
-      <Counter />
+      <MonthlyCalenderInfo />
     </div>
   );
 }
