@@ -5,6 +5,7 @@ import "./App.css";
 
 
 import {Switch, Route} from "react-router-dom";
+import {Months} from "./features/months/Months";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
         </Route>
         <Route path="/monthly_calender_info/:id">
           <MonthlyCalenderInfo />
+        </Route>
+        <Route path="/">
+          <Months/>
         </Route>
       </Switch>
     </div>

@@ -1,14 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import {selectDayEntities} from "../day/daySlice";
-import styles from './Days.module.css';
+import styles from './Days.module.scss';
 import classnames from "classnames";
+import {statusToStyle} from "../../mapping";
 
-const statusToStyle = {
-    "Not Set" : "none",
-    "Complete" : "green",
-    "Incomplete" : "red"
-}
 
 export function Days({days_ids}) {
     let dayEntities = useSelector(selectDayEntities);

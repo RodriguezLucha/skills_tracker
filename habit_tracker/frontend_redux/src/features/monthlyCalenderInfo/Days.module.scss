@@ -1,23 +1,13 @@
+@import '../../globals.module.scss'; 
+
 .container {
     display: flex;
 }
-
 .single_day {
 
 }
-
 .square {
     border: 1px solid black;
     width: 100%;
     height: 35px;
-}
-
-
-.green {
-    background-color: green;
-}
-.red {
-    background-color: red;
-}
-.none {
 }
