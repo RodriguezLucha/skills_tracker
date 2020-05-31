@@ -22,10 +22,10 @@ export function MonthlyCalenderInfo() {
     selectCalenderInfoById(state, currentMonth)
   );
 
+  console.log(monthlyCalenderInfo);
   if (!monthlyCalenderInfo) {
     return null;
   }
-
   return (
     <div>
       <h1 className="month-name">

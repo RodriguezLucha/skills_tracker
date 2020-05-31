@@ -3,8 +3,6 @@ import { useSelector } from "react-redux";
 import {selectDayEntities} from "../day/daySlice";
 
 export function Days({days_ids}) {
-
-    
     let dayEntities = useSelector(selectDayEntities);
 
     if(!days_ids){return null}
@@ -15,16 +13,11 @@ export function Days({days_ids}) {
         <div className="days_container">
             {days.map(day => {
                 return (
-
                 <div key={day.id} className="square" >
-            
-                        <div className="one_day">
-                            <div>{day.day}</div>
-                            <div>{day.day_of_week}</div>
-                        </div>
-                        
-          
-
+                    <div className="one_day">
+                        <div>{day.day}</div>
+                        <div>{day.day_of_week}</div>
+                    </div>
                 </div>
                 )
             })}

@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import {selectCalenderEntities} from "../calender/calenderSlice";
 import {Days} from "./Days";
+import {Link} from "react-router-dom";
 
 export function Calenders({calender_ids}) {
     
@@ -16,7 +17,9 @@ export function Calenders({calender_ids}) {
             {calenders.map(calender => {
                 return(
                 <div key={calender.id}>
-                    <h5>{calender.name}</h5>
+                    <Link to={`calender_detail/${calender.id}`}>
+                        <h5>{calender.name}</h5>
+                    </Link>
                     <Days days_ids={calender.days}/>
                 </div>
                 )
