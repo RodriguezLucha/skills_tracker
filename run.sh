@@ -2,6 +2,6 @@
 cd ./habit_tracker/backend/my_app
 ./run.sh &
 
-cd ../../../habit_tracker/frontend/
+cd ../../../habit_tracker/frontend_redux/
 ./run.sh &
 

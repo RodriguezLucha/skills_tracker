@@ -12,6 +12,7 @@
 }
 
 .back_button {
+    display: flex;
     border-radius: 5px;
     width: 50px;
     height: 50%;
@@ -25,11 +26,10 @@
     flex-wrap: wrap;
 }
 
-$square_size: 200px;
-
 .square {
-    height: $square_size;
-    width: $square_size;
+    height: 200px;
+    width: 236px;
+    margin: 2px;
 }
 
 .one_day {
@@ -38,6 +38,7 @@ $square_size: 200px;
     justify-content: space-between;
     align-items: center;
     height: 100%;
+    padding: 6px;
 }
 
 .day {
@@ -59,6 +60,14 @@ $square_size: 200px;
 }
 
 .toggle_button {
-    font-size: 2em;
-    border-radius: 50%;
+    display: flex;
+    width: 50%;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+}
+
+.placeholder {
+    width: 50px;
 }

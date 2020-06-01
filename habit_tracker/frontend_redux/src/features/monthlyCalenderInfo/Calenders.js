@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import {selectCalenderEntities} from "../calender/calenderSlice";
 import {Days} from "./Days";
 import {Link} from "react-router-dom";
+import styles from "./Calender.module.scss";
 
 export function Calenders({calender_ids}) {
     
@@ -18,7 +19,7 @@ export function Calenders({calender_ids}) {
                 return(
                 <div key={calender.id}>
                     <Link to={`/calender_detail/${calender.id}`}>
-                        <h5>{calender.name}</h5>
+                        <h5 className={styles.month_name}>{calender.name}</h5>
                     </Link>
                     <Days days_ids={calender.days}/>
                 </div>
