@@ -2,10 +2,11 @@ import React from "react";
 import {Link, useParams, useHistory} from "react-router-dom"
 import {useSelector, useDispatch} from "react-redux"
 import {selectCalenderById} from "../calender/calenderSlice";
-import {selectDayEntities, updateDayStatus} from "../day/daySlice";
+import {selectDayEntities, updateDayStatus, updateDayNote} from "../day/daySlice";
 import styles from "./CalenderDetail.module.scss";
 import {statusToStyle} from "../../mapping";
 import classnames from "classnames";
+import EasyEdit, {Types} from 'react-easy-edit';
 
 const values = ['Not Set', 'Complete', 'Incomplete'];
 
@@ -28,8 +29,11 @@ export function CalenderDetail() {
 
     function handleToggle(id){
         let status = getNextStatus(dayEntities[id].status);
-        console.log(status);
         dispatch(updateDayStatus({day: id, status:getNextStatus(status)}));
+    }
+
+    function handleSave(id, note){
+        dispatch(updateDayNote({id, note}));
     }
     
     return (
@@ -50,7 +54,17 @@ export function CalenderDetail() {
                                     <div className={styles.day}>{day.day}</div>
                                     <div className={styles.day_of_week}>{day.day_of_week}</div>
                                 </div>
-                                <div className="day_note">{day.note}</div>
+                                <EasyEdit
+                                      type={Types.TEXT}
+                                      value={day.note}
+                                      placeholder="___________________"
+                                      onSave={(text) => handleSave(day.id, text)}
+                                      saveButtonLabel="Save"
+                                      hideSaveButton={true}
+                                      hideCancelButton={true}
+                                      onHoverCssClass="hover_class"
+                                      cancelButtonLabel="Cancel"
+                                />
                                 <button onClick={() => handleToggle(day.id)}>Toggle</button>
                             </div>
                         </div>

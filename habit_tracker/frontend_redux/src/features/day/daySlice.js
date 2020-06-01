@@ -20,7 +20,19 @@ const initialState = dayAdapter.getInitialState();
       const data = await response.json();
       return {day, status};
     }
-  );
+);
+export const updateDayNote = createAsyncThunk(
+    "day/updateDayNote",
+    async({id, note}, thunkAPI) => {
+        const requestOptions = { method: "POST"};
+        const response = await fetch(
+            `/calender/day/${id}/note?note=${note}`,
+            {method: "POST"}
+        );
+        const data = await response.json();
+        return {id, note};
+    }
+)
 
 export const daySlice = createSlice({
     name: "day",
@@ -34,7 +46,12 @@ export const daySlice = createSlice({
         [updateDayStatus.fulfilled]: (state, action) => {
             let {day, status} = action.payload;
             state.entities[day].status = status;
+        },
+        [updateDayNote.fulfilled]: (state, action) => {
+            let {id, note} = action.payload;
+            state.entities[id].note = note;
         }
+
     },
 });
 
