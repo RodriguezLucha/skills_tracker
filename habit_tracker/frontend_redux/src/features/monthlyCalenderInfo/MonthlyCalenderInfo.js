@@ -9,6 +9,7 @@ import {Calenders} from "./Calenders";
 
 import {useParams, Link} from "react-router-dom";
 import {Months} from "../months/Months";
+import styles from "./MonthlyCalenderInfo.module.scss";
 
 export function MonthlyCalenderInfo() {
   const dispatch = useDispatch();
@@ -33,11 +34,12 @@ export function MonthlyCalenderInfo() {
   return (
     <div>
       <div>
-        <h1 className="month-name">
-          {monthlyCalenderInfo.id}
-        </h1>
-        <Months/>
-        
+        <div className={styles.header}>
+          <h1 className="month-name">
+            {monthlyCalenderInfo.id}
+          </h1>
+          <Months/>
+        </div>
       </div>
       <Calenders calender_ids={monthlyCalenderInfo.calenders}/>
     </div>

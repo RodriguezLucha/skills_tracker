@@ -7,6 +7,7 @@ import styles from "./CalenderDetail.module.scss";
 import {statusToStyle} from "../../mapping";
 import classnames from "classnames";
 import EasyEdit, {Types} from 'react-easy-edit';
+import {Button} from 'reactstrap';
 
 const values = ['Not Set', 'Complete', 'Incomplete'];
 
@@ -39,7 +40,7 @@ export function CalenderDetail() {
     return (
         <div>
             <header className={styles.header}>
-                <button onClick={() => history.goBack() }>Back</button>
+                <Button onClick={() => history.goBack() }>Back</Button>
                 <div className={styles.month}>{calender.name}</div>
                 <div></div>
             </header>
