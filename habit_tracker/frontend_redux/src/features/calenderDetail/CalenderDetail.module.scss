@@ -3,11 +3,21 @@
 .header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .month {
     font-size: 2em;
     padding: 20px;
+}
+
+.back_button {
+    border-radius: 5px;
+    width: 50px;
+    height: 50%;
+    font-size: 2em;
+    padding: 10px;
+    margin: 10px;
 }
 
 .container{ 
@@ -18,8 +28,6 @@
 $square_size: 200px;
 
 .square {
-    border: 1px solid black;
-    border-radius: 4px;
     height: $square_size;
     width: $square_size;
 }
@@ -34,7 +42,6 @@ $square_size: 200px;
 
 .day {
     font-size: 1.5em;
-    padding: 10px;
 }
 
 .day_header {
@@ -45,9 +52,13 @@ $square_size: 200px;
 }
 
 .day_of_week {
-    padding: 10px;
 }
 
 .note {
 
+}
+
+.toggle_button {
+    font-size: 2em;
+    border-radius: 50%;
 }

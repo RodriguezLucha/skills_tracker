@@ -5,7 +5,7 @@ import styles from './Days.module.scss';
 import classnames from "classnames";
 import {statusToStyle} from "../../mapping";
 
-
+import {Card, CardBody} from 'reactstrap';
 
 export function Days({days_ids}) {
     let dayEntities = useSelector(selectDayEntities);
@@ -19,11 +19,11 @@ export function Days({days_ids}) {
             {days.map(day => {
                 let squareColorStyle = styles[statusToStyle[day.status]];
                 return (
-                <div key={day.id} className={classnames(styles.square, squareColorStyle)} >
-                    <div className={styles.single_day}>
+                <Card key={day.id} className={classnames(styles.square, squareColorStyle)} >
+                    <CardBody className={styles.single_day}>
                         <div>{day.day}</div>
-                    </div>
-                </div>
+                    </CardBody>
+                </Card>
                 )
             })}
         </div>

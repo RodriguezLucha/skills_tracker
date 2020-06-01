@@ -7,7 +7,7 @@ import styles from "./CalenderDetail.module.scss";
 import {statusToStyle} from "../../mapping";
 import classnames from "classnames";
 import EasyEdit, {Types} from 'react-easy-edit';
-import {Button} from 'reactstrap';
+import {Button, Card, CardBody} from 'reactstrap';
 
 const values = ['Not Set', 'Complete', 'Incomplete'];
 
@@ -40,8 +40,12 @@ export function CalenderDetail() {
     return (
         <div>
             <header className={styles.header}>
-                <Button onClick={() => history.goBack() }>Back</Button>
-                <div className={styles.month}>{calender.name}</div>
+                <Button color="primary" className={styles.back_button} onClick={() => history.goBack() }>
+                    <svg class="bi bi-arrow-left-circle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.646 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L6.207 7.5H11a.5.5 0 0 1 0 1H6.207l2.147 2.146z"/>
+                    </svg>          
+                </Button>
+                <h1 className={styles.month}>{calender.name}</h1>
                 <div></div>
             </header>
             <div className={styles.container}>
@@ -49,8 +53,8 @@ export function CalenderDetail() {
                     days.map(day => {
                         let squareColorStyle = styles[statusToStyle[day.status]];
                         return (
-                        <div key={day.id} className={classnames(styles.square, squareColorStyle)}>
-                            <div className={styles.one_day}>
+                        <Card key={day.id} className={classnames(styles.square, squareColorStyle)}>
+                            <CardBody className={styles.one_day}>
                                 <div className={styles.day_header}>
                                     <div className={styles.day}>{day.day}</div>
                                     <div className={styles.day_of_week}>{day.day_of_week}</div>
@@ -66,9 +70,14 @@ export function CalenderDetail() {
                                       onHoverCssClass="hover_class"
                                       cancelButtonLabel="Cancel"
                                 />
-                                <button onClick={() => handleToggle(day.id)}>Toggle</button>
-                            </div>
-                        </div>
+                                <Button color="primary" className={styles.toggle_Button} onClick={() => handleToggle(day.id)}>
+                                    <svg class="bi bi-arrow-clockwise" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                      <path fill-rule="evenodd" d="M3.17 6.706a5 5 0 0 1 7.103-3.16.5.5 0 1 0 .454-.892A6 6 0 1 0 13.455 5.5a.5.5 0 0 0-.91.417 5 5 0 1 1-9.375.789z"/>
+                                      <path fill-rule="evenodd" d="M8.147.146a.5.5 0 0 1 .707 0l2.5 2.5a.5.5 0 0 1 0 .708l-2.5 2.5a.5.5 0 1 1-.707-.708L10.293 3 8.147.854a.5.5 0 0 1 0-.708z"/>
+                                    </svg>
+                                </Button>
+                            </CardBody>
+                        </Card>
                         )
                     })
                 }
