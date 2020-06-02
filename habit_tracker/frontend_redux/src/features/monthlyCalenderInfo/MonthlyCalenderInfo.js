@@ -6,8 +6,9 @@ import {
 } from "./monthlyCalenderInfoSlice";
 
 import {Calenders} from "./Calenders";
+import {NewCalenderInput} from "./NewCalenderInput";
 
-import {useParams, Link} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {Months} from "../months/Months";
 import styles from "./MonthlyCalenderInfo.module.scss";
 
@@ -25,7 +26,7 @@ export function MonthlyCalenderInfo() {
 
   useEffect(() => {
     dispatch(fetchCalenderByMonth(id));
-  }, [id]);
+  }, [id, dispatch]);
 
 
   if (!monthlyCalenderInfo) {
@@ -42,6 +43,7 @@ export function MonthlyCalenderInfo() {
         </div>
       </div>
       <Calenders calender_ids={monthlyCalenderInfo.calenders}/>
+      <NewCalenderInput/>
     </div>
   );
 }

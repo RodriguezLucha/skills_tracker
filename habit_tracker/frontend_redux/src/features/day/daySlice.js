@@ -17,19 +17,18 @@ const initialState = dayAdapter.getInitialState();
           `/calender/day/${day}/status?status=${status}`,
           requestOptions
       );
-      const data = await response.json();
+      await response.json();
       return {day, status};
     }
 );
 export const updateDayNote = createAsyncThunk(
     "day/updateDayNote",
     async({id, note}, thunkAPI) => {
-        const requestOptions = { method: "POST"};
         const response = await fetch(
             `/calender/day/${id}/note?note=${note}`,
             {method: "POST"}
         );
-        const data = await response.json();
+        await response.json();
         return {id, note};
     }
 )

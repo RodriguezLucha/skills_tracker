@@ -112,8 +112,8 @@ sub monthv2 {
 
     my $output = { id => $month };
 
-# "id","day","month","year","grid_position","day_of_week","status","note","calender_id","id","name","year","day_id"
-# 1956,5,May,2020,0,Tuesday,Complete,"2.3 miles",6,6,Running,2020,1956
+    # "id","day","month","year","grid_position","day_of_week","status","note","calender_id","id","name","year","day_id"
+    # 1956,5,May,2020,0,Tuesday,Complete,"2.3 miles",6,6,Running,2020,1956
 
     my @rows = @$result;
 
@@ -180,7 +180,6 @@ sub create {
         { returning => 'id' }
     )->hash->{id};
 
-    my @days = ();
     my $time = 1577869261;    # Jan 1st, 2020
 
     my ( $sec, $min, $hour, $month_day, $month_num_zero_based, $year_add_1900,
@@ -189,29 +188,35 @@ sub create {
 
     my $debug = $day_of_week;
 
+    my $result = {};
+    $result->{id} = $id;
+    $result->{name} = $name;
+
+    my @days = ();
+
     foreach my $counter ( 1 .. 365 + 1 ) {
 
         my ( $sec, $min, $hour, $month_day, $month_num_zero_based,
             $year_add_1900, $day_of_week, $yday, $isdst )
           = localtime($time);
 
-        $pg->db->insert(
-            'day',
-            {
-                calender_id   => $id,
-                day           => $month_day,
-                month         => $months{$month_num_zero_based},
-                year          => $year_add_1900 + 1900,
-                grid_position => 0,
-                day_of_week   => $days_of_week{$day_of_week},
-                status        => $NOT_SET,
-            }
-        );
+        my $obj = {
+            calender_id   => $id,
+            day           => $month_day,
+            month         => $months{$month_num_zero_based},
+            year          => $year_add_1900 + 1900,
+            grid_position => 0,
+            day_of_week   => $days_of_week{$day_of_week},
+            status        => $NOT_SET,
+        };
 
+        $pg->db->insert( 'day' , $obj);
         $time += 86400;
+        push @days, $obj;
     }
 
-    return $c->render( json => { id => $id, debug => $debug } );
+    $result->{days} = \@days;
+    return $c->render( json => $result );
 }
 
 1;
