@@ -15,8 +15,8 @@ export const fetchCalenderByMonth = createAsyncThunk(
     const normalized = normalize(data, monthlyCalenderInfo);
     return normalized.entities;
   }
-);
-
+  );
+  
 export const calenderInfoAdapter = createEntityAdapter();
 
 const initialState = calenderInfoAdapter.getInitialState();

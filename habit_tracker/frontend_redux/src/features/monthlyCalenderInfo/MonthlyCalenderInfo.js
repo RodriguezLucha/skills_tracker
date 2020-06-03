@@ -16,7 +16,7 @@ export function MonthlyCalenderInfo() {
   const dispatch = useDispatch();
 
   //TODO:Move this into redux store now that redux store is persisted to localStorage
-  // const [currentMonth] = useStorageState(localStorage, "state_month", "May");
+  //const [currentMonth] = useStorageState(localStorage, "state_month", "May");
 
   let {id} = useParams();
 
@@ -39,11 +39,11 @@ export function MonthlyCalenderInfo() {
           <h1 className="month-name">
             {monthlyCalenderInfo.id}
           </h1>
-          <Months/>
+          <Months monthlyCalenderInfoId={monthlyCalenderInfo.id}/>
         </div>
       </div>
-      <Calenders calender_ids={monthlyCalenderInfo.calenders}/>
-      <NewCalenderInput/>
+      <Calenders calender_ids={monthlyCalenderInfo.calenders} monthlyCalenderInfoId={monthlyCalenderInfo.id}/>
+      <NewCalenderInput monthlyCalenderInfoId={monthlyCalenderInfo.id}/>
     </div>
   );
 }

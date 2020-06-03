@@ -3,7 +3,9 @@ import {
     createEntityAdapter,
     createAsyncThunk
 } from "@reduxjs/toolkit";
-import {fetchCalenderByMonth} from "../monthlyCalenderInfo/monthlyCalenderInfoSlice";
+import {normalize} from "normalizr";
+import {calender} from "../../schemas";
+import {fetchCalenderByMonth, calenderInfoAdapter} from "../monthlyCalenderInfo/monthlyCalenderInfoSlice";
 
 export const calenderAdapter = createEntityAdapter();
 
@@ -23,16 +25,34 @@ export const addNewCalender = createAsyncThunk(
     }
 );
 
+export const deleteCalender = createAsyncThunk(
+    "calender/deleteCalender",
+    async (id, thunkApi) => {
+        const requestOptions = {
+            method: "DELETE"
+        };
+        const response = await fetch(
+            `/calender/${id}`,
+            requestOptions
+        );
+        const data = await response.json();
+        return data;
+    }
+)
+
 export const calenderSlice = createSlice({
     name: "calender",
     initialState,
     reducers: {},
     extraReducers: {
+        [addNewCalender.fulfilled]: (state, action) => {
+  
+        },
         [fetchCalenderByMonth.fulfilled]: (state, action) => {
             calenderAdapter.upsertMany(state, action.payload.calender);
         },
-        [addNewCalender.fulfilled]: (state, action) => {
-            calenderAdapter.upsertMany(state, action.payload.calender);
+        [deleteCalender.fulfilled]: (state, action) => {
+
         }
 
     },

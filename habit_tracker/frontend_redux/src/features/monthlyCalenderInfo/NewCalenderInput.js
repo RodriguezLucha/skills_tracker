@@ -3,9 +3,10 @@ import { useDispatch } from "react-redux";
 import {InputGroup, InputGroupAddon, Input, Button } from 'reactstrap';
 import styles from "./NewCalenderInput.module.scss";
 import {addNewCalender} from "../calender/calenderSlice";
+import {fetchCalenderByMonth} from "./monthlyCalenderInfoSlice";
 
 
-export function NewCalenderInput() {
+export function NewCalenderInput({monthlyCalenderInfoId}) {
 
     const dispatch = useDispatch();
     const [name, setName] = useState("");
@@ -15,7 +16,9 @@ export function NewCalenderInput() {
     }
     
     function handleSubmit(){
-        dispatch(addNewCalender(name));
+        dispatch(addNewCalender(name)).then(
+            dispatch(fetchCalenderByMonth(monthlyCalenderInfoId))
+        )
         setName("");
     }
 

@@ -4,6 +4,7 @@ import {
     createAsyncThunk
 } from "@reduxjs/toolkit";
 import {fetchCalenderByMonth} from "../monthlyCalenderInfo/monthlyCalenderInfoSlice";
+import {addNewCalender} from "../calender/calenderSlice";
 
 export const dayAdapter = createEntityAdapter();
 
@@ -42,6 +43,9 @@ export const daySlice = createSlice({
         [fetchCalenderByMonth.fulfilled]: (state, action) => {
             dayAdapter.upsertMany(state, action.payload.day);
         },
+        [addNewCalender.fulfilled]: (state, action) => {
+
+        },
         [updateDayStatus.fulfilled]: (state, action) => {
             let {day, status} = action.payload;
             state.entities[day].status = status;
@@ -50,7 +54,6 @@ export const daySlice = createSlice({
             let {id, note} = action.payload;
             state.entities[id].note = note;
         }
-
     },
 });
 

@@ -203,14 +203,15 @@ sub create {
         my $obj = {
             calender_id   => $id,
             day           => $month_day,
-            month         => $months{$month_num_zero_based},
-            year          => $year_add_1900 + 1900,
-            grid_position => 0,
             day_of_week   => $days_of_week{$day_of_week},
+            grid_position => 0,
+            month         => $months{$month_num_zero_based},
             status        => $NOT_SET,
+            year          => $year_add_1900 + 1900,
         };
 
         $pg->db->insert( 'day' , $obj);
+        $obj->{id} = $id;
         $time += 86400;
         push @days, $obj;
     }
