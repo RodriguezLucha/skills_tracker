@@ -8,6 +8,7 @@ import {statusToStyle} from "../../mapping";
 import classnames from "classnames";
 import EasyEdit, {Types} from 'react-easy-edit';
 import {Button, Card, CardBody} from 'reactstrap';
+import { motion } from "framer-motion";
 
 const values = ['Not Set', 'Incomplete', 'Complete'];
 
@@ -36,9 +37,24 @@ export function CalenderDetail() {
     function handleSave(id, note){
         dispatch(updateDayNote({id, note}));
     }
+
+    const transition = { duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] };
+    const thumbnailVariants = {
+      initial: { scale: 0.9, opacity: 0 },
+      enter: { scale: 1, opacity: 1, transition },
+      exit: {
+        scale: 0.5,
+        opacity: 0,
+        transition: { duration: 0.1, ...transition }
+      }
+    };
     
     return (
-        <div>
+        <motion.div
+        initial="exit" animate="enter" exit="exit"
+        variants={thumbnailVariants}
+        
+        >
             <header className={styles.header}>
                 <Button color="primary" className={styles.back_button} onClick={() => history.goBack() }>
                     <svg className="bi bi-arrow-left-circle-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -82,6 +98,6 @@ export function CalenderDetail() {
                     })
                 }
             </div>
-        </div>
+        </motion.div>
     )
 }

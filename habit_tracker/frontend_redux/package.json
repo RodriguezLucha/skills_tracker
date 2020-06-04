@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "classnames": "^2.2.6",
+    "framer-motion": "^1.11.0",
     "node-sass": "^4.14.1",
     "normalizr": "^3.6.0",
     "react": "^16.13.1",
