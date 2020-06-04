@@ -38,21 +38,27 @@ export function CalenderDetail() {
         dispatch(updateDayNote({id, note}));
     }
 
-    const transition = { duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] };
-    const thumbnailVariants = {
-      initial: { scale: 0.9, opacity: 0 },
-      enter: { scale: 1, opacity: 1, transition },
-      exit: {
-        scale: 0.5,
-        opacity: 0,
-        transition: { duration: 0.1, ...transition }
+    const spring = {
+        type: "spring",
+        damping: 50,
+        stiffness: 50
       }
-    };
+  
+    const thumbnailVariants = {
+        initial: {  opacity: 0, x: "-10%", transition: {duration: 0.2} },
+        enter: {  opacity: 1, x: "0%" },
+        exit: {
+          x: "10%",
+          opacity: 0,
+          transition: {duration: 0.2}
+        }
+      };
     
     return (
         <motion.div
         initial="exit" animate="enter" exit="exit"
         variants={thumbnailVariants}
+        transition={spring}
         
         >
             <header className={styles.header}>

@@ -31,14 +31,20 @@ export function MonthlyCalenderInfo() {
     },
     [id, dispatch]
   );
-  const transition = { duration: 0.4, ease: [0.43, 0.13, 0.23, 0.96] };
+
+  const spring = {
+    type: "spring",
+    damping: 50,
+    stiffness: 100
+  }
+
   const thumbnailVariants = {
-    initial: { scale: 0.9, opacity: 0 },
-    enter: { scale: 1, opacity: 1, transition },
+    initial: {  opacity: 0, x: "10%", transition: {duration: 0.2} },
+    enter: {  opacity: 1, x: "0%" },
     exit: {
-      scale: 0.5,
+      x: "-10%",
       opacity: 0,
-      transition: { duration: 0.1, ...transition }
+      transition: {duration: 0.2}
     }
   };
 
@@ -51,6 +57,7 @@ export function MonthlyCalenderInfo() {
       animate="enter"
       exit="exit"
       variants={thumbnailVariants}
+      transition={spring}
     >
       <div>
         <div className={styles.header}>
