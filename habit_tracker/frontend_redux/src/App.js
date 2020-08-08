@@ -5,40 +5,24 @@ import { MonthlyCalenderInfo } from "./features/monthlyCalenderInfo/MonthlyCalen
 import { CalenderDetail } from "./features/calenderDetail/CalenderDetail";
 import "./App.css";
 
-
-import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
-import {Months} from "./features/months/Months";
-
-
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import { Months } from "./features/months/Months";
 
 function App() {
-  
   return (
-   
     <Router>
-      <Route render={({location}) => {
-        console.log(location)
-      return (
-        <AnimatePresence exitBeforeEnter initial={false}>
-
-          <Switch location={location} key={location.pathname}>
-            <Route path="/calender_detail/:id">
-              <CalenderDetail/>
-            </Route>
-            <Route path="/monthly_calender_info/:id">
-              <MonthlyCalenderInfo />
-            </Route>
-            <Route path="/">
-              <Months/>
-            </Route>
-          </Switch>
-        </AnimatePresence>
-
-      )}}>
-
-      </Route>
-      </Router>
-
+      <Switch>
+        <Route exact path="/calender_detail/:id">
+          <CalenderDetail />
+        </Route>
+        <Route exact path="/monthly_calender_info/:id">
+          <MonthlyCalenderInfo />
+        </Route>
+        <Route exact path="/">
+          <Months />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

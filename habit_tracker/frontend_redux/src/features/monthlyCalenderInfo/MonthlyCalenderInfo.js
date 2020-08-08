@@ -21,6 +21,8 @@ export function MonthlyCalenderInfo() {
 
   let { id } = useParams();
 
+  console.log(id);
+
   const monthlyCalenderInfo = useSelector(state =>
     selectCalenderInfoById(state, id)
   );
@@ -52,13 +54,7 @@ export function MonthlyCalenderInfo() {
     return null;
   }
   return (
-    <motion.div
-      initial="exit"
-      animate="enter"
-      exit="exit"
-      variants={thumbnailVariants}
-      transition={spring}
-    >
+    <>
       <div>
         <div className={styles.header}>
           <h1 className="month-name">
@@ -72,6 +68,6 @@ export function MonthlyCalenderInfo() {
         monthlyCalenderInfoId={monthlyCalenderInfo.id}
       />
       <NewCalenderInput monthlyCalenderInfoId={monthlyCalenderInfo.id} />
-    </motion.div>
+    </>
   );
 }
