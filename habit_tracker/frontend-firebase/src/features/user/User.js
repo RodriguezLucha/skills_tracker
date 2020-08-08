@@ -14,9 +14,22 @@ export function User() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [data, setData] = useState("");
+  const [userData, setUserData] = useState("");
 
   const email = useSelector(selectEmail);
   const uid = useSelector(selectUid);
+
+  const docRef = uid ? db.collection("users").doc(uid) : null;
+  if (docRef) {
+    docRef.get().then(function(doc) {
+      if (doc.exists) {
+        let docData = doc.data();
+        console.log(docData.stringExample);
+        setUserData(docData.stringExample);
+      }
+    });
+  }
 
   useEffect(
     () => {
@@ -48,6 +61,7 @@ export function User() {
       .signOut()
       .then(function() {
         dispatch(logout());
+        setUserData('');
       })
       .catch(function(error) {
         // An error happened.
@@ -55,11 +69,12 @@ export function User() {
   };
 
   const handleAddData = () => {
-    let docData = { stringExample: "Hello world!" };
+    let docData = { stringExample: data };
 
     db.collection("users").doc(uid).set(docData).then(function() {
       console.log("Document successfully written!");
     });
+    setData("");
   };
 
   return (
@@ -85,7 +100,15 @@ export function User() {
         </div>
       </div>
       <div>
+        <label>
+          User Data
+          <input value={data} onChange={e => setData(e.target.value)} />
+        </label>
         <button onClick={handleAddData}>Add Data</button>
+        <div>
+          Users Data:
+          {userData}
+        </div>
       </div>
     </div>
   );
